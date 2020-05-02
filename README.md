@@ -13,17 +13,13 @@
 
 ```
 docker build -t sylvainleroux/rpi-node-puppeteer .
+
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t sylvainleroux/rpi-node-puppeteer:latest --push .  
 ```
 
 ## Run 
 
 ```
+
 docker run -i --init --rm --cap-add=SYS_ADMIN    --name rpi-node-puppeteer sylvainleroux/rpi-node-puppeteer  node -e "`cat test_script.js`"
-```
-
-
-## Build 
-
-```
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t sylvainleroux/rpi-node-puppeteer:latest --push .  
 ```
