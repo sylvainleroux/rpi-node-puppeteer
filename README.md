@@ -12,11 +12,11 @@
 ## Build image
 
 ```
-docker build -t sleroux/rpi-node-puppeteer .
+docker build -t sylvainleroux/rpi-node-puppeteer .
 ```
 
 ## Run 
 
 ```
-docker run -i --init --rm --cap-add=SYS_ADMIN    --name rpi-node-puppeteer sleroux/rpi-node-puppeteer  node -e "`cat test_script.js`"
+docker run -i --init --rm --cap-add=SYS_ADMIN    --name rpi-node-puppeteer sylvainleroux/rpi-node-puppeteer  node -e "`cat test_script.js`"
 ```
