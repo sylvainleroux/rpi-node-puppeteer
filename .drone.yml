@@ -6,3 +6,13 @@ name: default
 platform:
   os: linux
   arch: arm
+
+- name: docker
+  image: plugins/docker
+  settings:
+    repo: sylvainleroux/rpi-node-puppeteer
+    auto_tag: true
+    username: 
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
