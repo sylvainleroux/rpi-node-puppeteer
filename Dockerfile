@@ -50,7 +50,7 @@ RUN apt-get update && \
       libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 \
       libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 \
       libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
-      libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget && \
+      libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget snapd && \
     rm -rf /var/lib/apt/lists/*
 
 
@@ -63,12 +63,12 @@ RUN ARCH="$(dpkg --print-architecture)" \
     *) echo "unsupported architecture"; exit 1 ;; \
   esac \
   && echo $REPO $ARCH \
-  && wget $REPO/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg_81.0.4044.122-0ubuntu0.18.04.1_$ARCH.deb \
-  && wget $REPO/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg-extra_81.0.4044.122-0ubuntu0.18.04.1_$ARCH.deb \
-  && wget $REPO/pool/universe/c/chromium-browser/chromium-browser_81.0.4044.122-0ubuntu0.18.04.1_$ARCH.deb \
-  && dpkg -i chromium-codecs-ffmpeg_81.0.4044.122-0ubuntu0.18.04.1_$ARCH.deb \
-  && dpkg -i chromium-codecs-ffmpeg-extra_81.0.4044.122-0ubuntu0.18.04.1_$ARCH.deb \
-  && dpkg -i chromium-browser_81.0.4044.122-0ubuntu0.18.04.1_$ARCH.deb \
+  && wget $REPO/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg_81.0.4044.129-0ubuntu0.19.10.1_$ARCH.deb \
+  && wget $REPO/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg-extra_81.0.4044.129-0ubuntu0.19.10.1_$ARCH.deb \
+  && wget $REPO/pool/universe/c/chromium-browser/chromium-browser_81.0.4044.129-0ubuntu0.19.10.1_$ARCH.deb \
+  && dpkg -i chromium-codecs-ffmpeg_81.0.4044.129-0ubuntu0.19.10.1_$ARCH.deb \
+  && dpkg -i chromium-codecs-ffmpeg-extra_81.0.4044.129-0ubuntu0.19.10.1_$ARCH.deb \
+  && dpkg -i chromium-browser_81.0.4044.129-0ubuntu0.19.10.1_$ARCH.deb \
   && apt-get install -f -y
 
 # Install puppeteer so it's available in the container.
