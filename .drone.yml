@@ -25,7 +25,7 @@ image_pull_secrets:
 ---
 kind: secret
 name: registry_username
-data: kpNfnET/0dQGE0BDgEA1Qs4q8sgANhB5BaSyb2Nzyu82cdGenglc9MY=
+data: D6pDfHi2YDnIG5GL6oc/RTYShLWDGhgfqjZtDXvC9Q4QX7U=
 
 ---
 kind: secret
