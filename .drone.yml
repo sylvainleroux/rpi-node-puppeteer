@@ -24,6 +24,7 @@ kind: secret
 name: registry_username
 data: kpNfnET/0dQGE0BDgEA1Qs4q8sgANhB5BaSyb2Nzyu82cdGenglc9MY=
 
+---
 kind: secret
 name: registry_password
 data: xawGCWmYdGbr1WHXH1GAlAjotuU7qZC7M2Dh7jwKag0rOBxNtNv8FA==
