@@ -19,6 +19,9 @@ steps:
       password:
         from_secret: registry_password
 
+image_pull_secrets:
+  - docker_config
+
 ---
 kind: secret
 name: registry_username
@@ -28,3 +31,8 @@ data: kpNfnET/0dQGE0BDgEA1Qs4q8sgANhB5BaSyb2Nzyu82cdGenglc9MY=
 kind: secret
 name: registry_password
 data: xawGCWmYdGbr1WHXH1GAlAjotuU7qZC7M2Dh7jwKag0rOBxNtNv8FA==
+
+---
+kind: secret
+name: docker_config
+data: VOlhD04dkBdaw1BOHCcmfs1epDMxCL3YaGQgXXUe1mQz+amGajffDFGSsUSveByPhkocAtf+SS5/iGP59Wxigm0Y1r32VQFr8QJX0xFunmbMaPWVOMmx4PsJ5CsoPuw0/k9vdvJFzG1k1pLIp2VKiKZ6tnyNgtGIpV4LenNl2Y+fjd5iOnZv/s9p8WNBsRRtfrbXWVVRHpoxEQa3FDQEnvDIxJSfPwmkCynPZa22odf7jdkZJsUsHZ1I2dpd1f0OZWQVPRj9X3xpPYZNYjieNAulOFF1w0+kd+Jou+O8qnf/tDX7t5xWozUZlhOb2HDGwge/j6VdXPW1YGXk8Qf1MDZjUqde3fM+UyWArLvMnH4mgO/eU7z8QDk6GyPmq5tU8NxrKLJ8UA==
