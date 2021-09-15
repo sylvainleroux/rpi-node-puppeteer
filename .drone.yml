@@ -5,7 +5,7 @@ name: default
 
 platform:
   os: linux
-  arch: arm
+  arch: arm64
 
 steps:
   - name: docker
