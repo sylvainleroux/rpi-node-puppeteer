@@ -1,6 +1,100 @@
 ---
 kind: pipeline
 type: docker
+name: build-arm64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: docker
+    image: registry.slr.ovh/drone-docker
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
+    settings:
+      repo: registry.slr.ovh/rpi-node-puppeteer
+      registry: registry.slr.ovh
+      tags:
+        - linux-arm64
+      username:
+        from_secret: registry_username
+      password:
+        from_secret: registry_password
+
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
+
+image_pull_secrets:
+  - docker_config
+
+---
+kind: pipeline
+type: docker
+name: build-amd64
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: docker
+    image: registry.slr.ovh/drone-docker
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
+    settings:
+      repo: registry.slr.ovh/rpi-node-puppeteer
+      registry: registry.slr.ovh
+      tags:
+        - linux-amd64
+      username:
+        from_secret: registry_username
+      password:
+        from_secret: registry_password
+
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
+
+image_pull_secrets:
+  - docker_config
+
+---
+kind: pipeline
+type: docker
+name: manifest
+
+steps:
+  - name: client-deps-manifest
+    image: plugins/manifest
+    settings:
+      username:
+        from_secret: registry_username
+      password:
+        from_secret: registry_password
+      target: registry.slr.ovh/rpi-node-puppeteer
+      template: registry.slr.ovh/rpi-node-puppeteer:OS-ARCH
+      platforms:
+        - linux/amd64
+        - linux/arm64
+      tags:
+        - latest
+
+depends_on:
+  - build-amd64
+  - build-arm64
+
+image_pull_secrets:
+  - docker_config
+
+---
+kind: pipeline
+type: docker
 
 platform:
   os: linux
