@@ -12,6 +12,9 @@ steps:
     commands:
       - node -e "`cat test_script.js`"
 
+image_pull_secrets:
+  - docker_config
+
 ---
 kind: secret
 name: registry_username
