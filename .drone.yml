@@ -9,7 +9,7 @@ platform:
 steps:
   - name: test
     image: registry.slr.ovh/rpi-node-puppeteer
-    build_args_from_env: "--init --cap-add=SYS_ADMIN"
+    privileged: true
     commands:
       - node -e "`cat test_script.js`"
 
