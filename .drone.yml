@@ -95,13 +95,14 @@ image_pull_secrets:
 ---
 kind: pipeline
 type: docker
+name: Test linux-arm64
 
 platform:
   os: linux
   arch: arm64
 
 steps:
-  - name: test
+  - name: Run test
     image: registry.slr.ovh/rpi-node-puppeteer
     privileged: true
     commands:
@@ -109,6 +110,31 @@ steps:
 
 image_pull_secrets:
   - docker_config
+
+depends_on:
+  - build-arm64
+
+---
+kind: pipeline
+type: docker
+name: Test linux-amd64
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: Run test
+    image: registry.slr.ovh/rpi-node-puppeteer
+    privileged: true
+    commands:
+      - node -e "`cat test_script.js`"
+
+image_pull_secrets:
+  - docker_config
+
+depends_on:
+  - build-amd64
 
 ---
 kind: secret
