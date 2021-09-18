@@ -9,7 +9,7 @@ platform:
 
 steps:
   - name: docker
-    image: plugins/docker
+    image: registry.slr.ovh/drone-docker:linux-arm64
     settings:
       repo: registry.slr.ovh/rpi-node-puppeteer
       registry: registry.slr.ovh
@@ -34,7 +34,7 @@ platform:
 
 steps:
   - name: docker
-    image: plugins/docker
+    image: registry.slr.ovh/drone-docker:linux-amd64
     settings:
       repo: registry.slr.ovh/rpi-node-puppeteer
       registry: registry.slr.ovh
