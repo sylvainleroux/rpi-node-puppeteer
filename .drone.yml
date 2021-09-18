@@ -10,6 +10,9 @@ platform:
 steps:
   - name: docker
     image: registry.slr.ovh/drone-docker:linux-arm64
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
     settings:
       repo: registry.slr.ovh/rpi-node-puppeteer
       registry: registry.slr.ovh
@@ -19,6 +22,11 @@ steps:
         from_secret: registry_username
       password:
         from_secret: registry_password
+
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
 
 image_pull_secrets:
   - docker_config
