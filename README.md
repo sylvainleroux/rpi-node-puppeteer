@@ -2,24 +2,24 @@
 
 - Based on Ubuntu Bionic 18.04 LTS
 - Contains
-   - Node 10
-   - Puppeteer 3.0.2
-   - Chromimum 81
+  - Node 10
+  - Puppeteer 3.0.2
+  - Chromimum 81
 - Tested envirnments
-    - macOS 10.15.4 
-    - Raspbian GNU/Linux 10 (buster)
+  - macOS 10.15.4
+  - Raspbian GNU/Linux 10 (buster)
 
 ## Build image
 
 ```
 docker build -t sylvainleroux/rpi-node-puppeteer .
 
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t sylvainleroux/rpi-node-puppeteer:latest --push .  
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t sylvainleroux/rpi-node-puppeteer:latest --push .
 ```
 
-## Run 
+## Run
 
 ```
 
-docker run -i --init --rm --cap-add=SYS_ADMIN    --name rpi-node-puppeteer sylvainleroux/rpi-node-puppeteer  node -e "`cat test_script.js`"
+docker run -i --init --rm --cap-add=SYS_ADMIN    --name test registry.slr.ovh/rpi-node-puppeteer  node -e "`cat test_script.js`"
 ```
