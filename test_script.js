@@ -22,5 +22,5 @@ const fs = require("fs");
 
   await browser.close();
 
-  process.exit(dimensions.title !== "Google");
+  process.exit(dimensions.title !== "GoogLKJSLJle");
 })();
