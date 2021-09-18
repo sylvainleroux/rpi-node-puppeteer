@@ -1,19 +1,25 @@
 # Puppeteer docker image for Raspberry Pi 4
 
-- Based on Ubuntu Bionic 18.04 LTS
+[![Build Status](https://drone.slr.ovh/api/badges/sylvainleroux/rpi-node-puppeteer/status.svg)](https://drone.slr.ovh/sylvainleroux/rpi-node-puppeteer)
+
+- Based on Ubuntu 21.04 LTS
 - Contains
-  - Node 10
-  - Puppeteer 3.0.2
-  - Chromimum 81
+  - Node 14.17.6
+  - Puppeteer 10.2.0
+  - Chromimum 85.0.4183.83-0ubuntu2
 - Tested envirnments
-  - macOS 10.15.4
-  - Raspbian GNU/Linux 10 (buster)
+  - linux amd64
+  - linux arm64
 
 ## Build image
 
 ```
 docker build -t sylvainleroux/rpi-node-puppeteer .
+```
 
+Or for a multi-arch build
+
+```
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t sylvainleroux/rpi-node-puppeteer:latest --push .
 ```
 
