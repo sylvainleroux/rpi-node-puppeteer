@@ -21,5 +21,5 @@ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t sylvainle
 
 ```
 
-docker run -i --init --rm --cap-add=SYS_ADMIN    --name test registry.slr.ovh/rpi-node-puppeteer  node -e "`cat test_script.js`"
+docker run -i --init --rm --cap-add=SYS_ADMIN --name test registry.slr.ovh/rpi-node-puppeteer  node -e "`cat test_script.js`"
 ```
