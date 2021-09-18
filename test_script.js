@@ -21,4 +21,6 @@ const fs = require("fs");
   console.log("Dimensions:", dimensions);
 
   await browser.close();
+
+  process.exit(dimensions.title !== "Google");
 })();
