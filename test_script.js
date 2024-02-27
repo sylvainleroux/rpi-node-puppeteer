@@ -1,26 +1,26 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-
 (async () => {
   const browser = await puppeteer.launch({
     executablePath: "/usr/bin/chromium",
   });
+
   const page = await browser.newPage();
   await page.goto("https://www.google.com");
 
   // Get the "viewport" of the page, as reported by the page.
-  const dimensions = await page.evaluate(() => {
+  const data = await page.evaluate(() => {
     return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
-      deviceScaleFactor: window.devicePixelRatio,
-      title: document.title,
+      pageTitle: document.title,
     };
   });
 
-  console.log("Dimensions:", dimensions);
+  data.nodeVersion = process.version;
+  data.puppeteerVersion = require("puppeteer/package.json").version;
+  data.browserVersion = await browser.version();
+  console.log(JSON.stringify(data,null,2));
 
   await browser.close();
 
-  process.exit(dimensions.title !== "Google");
+  process.exit((data.pageTitle !== "Google" && 1) || 0);
 })();
