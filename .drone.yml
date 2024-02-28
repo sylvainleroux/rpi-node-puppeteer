@@ -18,10 +18,16 @@ steps:
       registry: registry.slr.ovh
       tags:
         - linux-arm64
+      dry-run: true
       username:
         from_secret: registry_username
       password:
         from_secret: registry_password
+  - name: Run test
+    image: registry.slr.ovh/rpi-node-puppeteer:linux-arm64
+    commands: 
+      - npm install
+      - npm test
 
 volumes:
   - name: docker_sock
@@ -30,27 +36,3 @@ volumes:
 
 image_pull_secrets:
   - docker_config
-
----
-kind: pipeline
-type: docker
-name: test-linux-arm64
-
-platform:
-  os: linux
-  arch: arm64
-
-clone:
-  disable: true
-
-steps:
-  - name: Run test
-    image: registry.slr.ovh/rpi-node-puppeteer:linux-arm64
-    commands: 
-      - node index.js
-
-image_pull_secrets:
-  - docker_config
-
-depends_on:
-  - build-arm64
