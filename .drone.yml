@@ -75,3 +75,32 @@ volumes:
 
 image_pull_secrets:
   - docker_config
+
+
+---
+kind: pipeline
+type: docker
+name: manifest
+
+steps:
+  - name: client-deps-manifest
+    image: plugins/manifest
+    settings:
+      username:
+        from_secret: registry_username
+      password:
+        from_secret: registry_password
+      target: registry.slr.ovh/rpi-node-puppeteer
+      template: registry.slr.ovh/rpi-node-puppeteer:OS-ARCH
+      platforms:
+        - linux/amd64
+        - linux/arm64
+      tags:
+        - latest
+
+depends_on:
+  - build-amd64
+  - build-arm64
+
+image_pull_secrets:
+  - docker_config
