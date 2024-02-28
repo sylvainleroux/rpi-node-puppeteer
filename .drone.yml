@@ -18,10 +18,16 @@ steps:
       registry: registry.slr.ovh
       tags:
         - linux-arm64
+      dry-run: true
       username:
         from_secret: registry_username
       password:
         from_secret: registry_password
+  - name: Run test
+    image: registry.slr.ovh/rpi-node-puppeteer:linux-arm64
+    commands: 
+      - npm install
+      - npm test
 
 volumes:
   - name: docker_sock
@@ -51,10 +57,16 @@ steps:
       registry: registry.slr.ovh
       tags:
         - linux-amd64
+      dry-run: true
       username:
         from_secret: registry_username
       password:
         from_secret: registry_password
+  - name: Run test
+    image: registry.slr.ovh/rpi-node-puppeteer:linux-amd64
+    commands: 
+      - npm install
+      - npm test
 
 volumes:
   - name: docker_sock
@@ -63,64 +75,3 @@ volumes:
 
 image_pull_secrets:
   - docker_config
-
----
-kind: pipeline
-type: docker
-name: manifest
-
-steps:
-  - name: client-deps-manifest
-    image: plugins/manifest
-    settings:
-      username:
-        from_secret: registry_username
-      password:
-        from_secret: registry_password
-      target: registry.slr.ovh/rpi-node-puppeteer
-      template: registry.slr.ovh/rpi-node-puppeteer:OS-ARCH
-      platforms:
-        - linux/amd64
-        - linux/arm64
-      tags:
-        - latest
-
-depends_on:
-  - build-amd64
-  - build-arm64
-
-image_pull_secrets:
-  - docker_config
-
----
-kind: pipeline
-type: docker
-
-platform:
-  os: linux
-  arch: arm64
-
-steps:
-  - name: test
-    image: registry.slr.ovh/rpi-node-puppeteer
-    privileged: true
-    commands:
-      - node -e "`cat test_script.js`"
-
-image_pull_secrets:
-  - docker_config
-
----
-kind: secret
-name: registry_username
-data: D6pDfHi2YDnIG5GL6oc/RTYShLWDGhgfqjZtDXvC9Q4QX7U=
-
----
-kind: secret
-name: registry_password
-data: xawGCWmYdGbr1WHXH1GAlAjotuU7qZC7M2Dh7jwKag0rOBxNtNv8FA==
-
----
-kind: secret
-name: docker_config
-data: VOlhD04dkBdaw1BOHCcmfs1epDMxCL3YaGQgXXUe1mQz+amGajffDFGSsUSveByPhkocAtf+SS5/iGP59Wxigm0Y1r32VQFr8QJX0xFunmbMaPWVOMmx4PsJ5CsoPuw0/k9vdvJFzG1k1pLIp2VKiKZ6tnyNgtGIpV4LenNl2Y+fjd5iOnZv/s9p8WNBsRRtfrbXWVVRHpoxEQa3FDQEnvDIxJSfPwmkCynPZa22odf7jdkZJsUsHZ1I2dpd1f0OZWQVPRj9X3xpPYZNYjieNAulOFF1w0+kd+Jou+O8qnf/tDX7t5xWozUZlhOb2HDGwge/j6VdXPW1YGXk8Qf1MDZjUqde3fM+UyWArLvMnH4mgO/eU7z8QDk6GyPmq5tU8NxrKLJ8UA==
